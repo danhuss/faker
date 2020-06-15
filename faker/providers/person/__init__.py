@@ -1,14 +1,50 @@
-localized = True
-
 from .. import BaseProvider
+
+localized = True
 
 
 class Provider(BaseProvider):
-    formats = ['{{first_name}} {{last_name}}', ]
+    formats = ['{{first_name}} {{last_name}}']
 
     first_names = ['John', 'Jane']
 
-    last_names = ['Doe', ]
+    last_names = ['Doe']
+
+    # https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+    language_names = [
+        'Afar', 'Abkhazian', 'Avestan', 'Afrikaans', 'Akan', 'Amharic',
+        'Aragonese', 'Arabic', 'Assamese', 'Avaric', 'Aymara', 'Azerbaijani',
+        'Bashkir', 'Belarusian', 'Bulgarian', 'Bihari languages', 'Bislama',
+        'Bambara', 'Bengali', 'Tibetan', 'Breton', 'Bosnian', 'Catalan',
+        'Chechen', 'Chamorro', 'Corsican', 'Cree', 'Czech', 'Church Slavic',
+        'Chuvash', 'Welsh', 'Danish', 'German', 'Divehi', 'Dzongkha', 'Ewe',
+        'Greek', 'English', 'Esperanto', 'Spanish', 'Estonian', 'Basque',
+        'Persian', 'Fulah', 'Finnish', 'Fijian', 'Faroese', 'French',
+        'Western Frisian', 'Irish', 'Gaelic', 'Galician', 'Guarani',
+        'Gujarati', 'Manx', 'Hausa', 'Hebrew', 'Hindi', 'Hiri Motu',
+        'Croatian', 'Haitian', 'Hungarian', 'Armenian', 'Herero',
+        'Interlingua', 'Indonesian', 'Interlingue', 'Igbo', 'Sichuan Yi',
+        'Inupiaq', 'Ido', 'Icelandic', 'Italian', 'Inuktitut', 'Japanese',
+        'Javanese', 'Georgian', 'Kongo', 'Kikuyu', 'Kuanyama', 'Kazakh',
+        'Kalaallisut', 'Central Khmer', 'Kannada', 'Korean', 'Kanuri',
+        'Kashmiri', 'Kurdish', 'Komi', 'Cornish', 'Kirghiz', 'Latin',
+        'Luxembourgish', 'Ganda', 'Limburgan', 'Lingala', 'Lao', 'Lithuanian',
+        'Luba-Katanga', 'Latvian', 'Malagasy', 'Marshallese', 'Maori',
+        'Macedonian', 'Malayalam', 'Mongolian', 'Marathi', 'Malay', 'Maltese',
+        'Burmese', 'Nauru', 'North Ndebele', 'Nepali',
+        'Ndonga', 'Dutch', 'Norwegian Nynorsk', 'Norwegian', 'South Ndebele',
+        'Navajo', 'Chichewa', 'Occitan', 'Ojibwa', 'Oromo', 'Oriya',
+        'Ossetian', 'Panjabi', 'Pali', 'Polish', 'Pushto', 'Portuguese',
+        'Quechua', 'Romansh', 'Rundi', 'Romanian', 'Russian', 'Kinyarwanda',
+        'Sanskrit', 'Sardinian', 'Sindhi', 'Northern Sami', 'Sango', 'Sinhala',
+        'Slovak', 'Slovenian', 'Samoan', 'Shona', 'Somali', 'Albanian',
+        'Serbian', 'Swati', 'Sotho, Southern', 'Sundanese', 'Swedish',
+        'Swahili', 'Tamil', 'Telugu', 'Tajik', 'Thai', 'Tigrinya', 'Turkmen',
+        'Tagalog', 'Tswana', 'Tonga', 'Turkish', 'Tsonga', 'Tatar', 'Twi',
+        'Tahitian', 'Uighur', 'Ukrainian', 'Urdu', 'Uzbek', 'Venda',
+        'Vietnamese', 'Walloon', 'Wolof', 'Xhosa', 'Yiddish',
+        'Yoruba', 'Zhuang', 'Chinese', 'Zulu',
+    ]
 
     def name(self):
         """
@@ -17,13 +53,11 @@ class Provider(BaseProvider):
         pattern = self.random_element(self.formats)
         return self.generator.parse(pattern)
 
-    @classmethod
-    def first_name(cls):
-        return cls.random_element(cls.first_names)
+    def first_name(self):
+        return self.random_element(self.first_names)
 
-    @classmethod
-    def last_name(cls):
-        return cls.random_element(cls.last_names)
+    def last_name(self):
+        return self.random_element(self.last_names)
 
     def name_male(self):
         if hasattr(self, 'formats_male'):
@@ -41,69 +75,64 @@ class Provider(BaseProvider):
         pattern = self.random_element(formats)
         return self.generator.parse(pattern)
 
-    @classmethod
-    def first_name_male(cls):
-        if hasattr(cls, 'first_names_male'):
-            return cls.random_element(cls.first_names_male)
-        return cls.first_name()
+    def first_name_male(self):
+        if hasattr(self, 'first_names_male'):
+            return self.random_element(self.first_names_male)
+        return self.first_name()
 
-    @classmethod
-    def first_name_female(cls):
-        if hasattr(cls, 'first_names_female'):
-            return cls.random_element(cls.first_names_female)
-        return cls.first_name()
+    def first_name_female(self):
+        if hasattr(self, 'first_names_female'):
+            return self.random_element(self.first_names_female)
+        return self.first_name()
 
-    @classmethod
-    def last_name_male(cls):
-        if hasattr(cls, 'last_names_male'):
-            return cls.random_element(cls.last_names_male)
-        return cls.last_name()
+    def last_name_male(self):
+        if hasattr(self, 'last_names_male'):
+            return self.random_element(self.last_names_male)
+        return self.last_name()
 
-    @classmethod
-    def last_name_female(cls):
-        if hasattr(cls, 'last_names_female'):
-            return cls.random_element(cls.last_names_female)
-        return cls.last_name()
+    def last_name_female(self):
+        if hasattr(self, 'last_names_female'):
+            return self.random_element(self.last_names_female)
+        return self.last_name()
 
-
-    @classmethod
-    def prefix(cls):
-        if hasattr(cls, 'prefixes'):
-            return cls.random_element(cls.prefixes)
-        if hasattr(cls, 'prefixes_male') and hasattr(cls, 'prefixes_female'):
-            prefixes = cls.random_element((cls.prefixes_male, cls.prefixes_female))
-            return cls.random_element(prefixes)
+    def prefix(self):
+        if hasattr(self, 'prefixes'):
+            return self.random_element(self.prefixes)
+        if hasattr(self, 'prefixes_male') and hasattr(self, 'prefixes_female'):
+            prefixes = self.random_element(
+                (self.prefixes_male, self.prefixes_female))
+            return self.random_element(prefixes)
         return ''
 
-    @classmethod
-    def prefix_male(cls):
-        if hasattr(cls, 'prefixes_male'):
-            return cls.random_element(cls.prefixes_male)
-        return cls.prefix()
+    def prefix_male(self):
+        if hasattr(self, 'prefixes_male'):
+            return self.random_element(self.prefixes_male)
+        return self.prefix()
 
-    @classmethod
-    def prefix_female(cls):
-        if hasattr(cls, 'prefixes_female'):
-            return cls.random_element(cls.prefixes_female)
-        return cls.prefix()
+    def prefix_female(self):
+        if hasattr(self, 'prefixes_female'):
+            return self.random_element(self.prefixes_female)
+        return self.prefix()
 
-    @classmethod
-    def suffix(cls):
-        if hasattr(cls, 'suffixes'):
-            return cls.random_element(cls.suffixes)
-        if hasattr(cls, 'suffixes_male') and hasattr(cls, 'suffixes_female'):
-            suffixes = cls.random_element((cls.suffixes_male, cls.suffixes_female))
-            return cls.random_element(suffixes)
+    def suffix(self):
+        if hasattr(self, 'suffixes'):
+            return self.random_element(self.suffixes)
+        if hasattr(self, 'suffixes_male') and hasattr(self, 'suffixes_female'):
+            suffixes = self.random_element(
+                (self.suffixes_male, self.suffixes_female))
+            return self.random_element(suffixes)
         return ''
 
-    @classmethod
-    def suffix_male(cls):
-        if hasattr(cls, 'suffixes_male'):
-            return cls.random_element(cls.suffixes_male)
-        return cls.suffix()
+    def suffix_male(self):
+        if hasattr(self, 'suffixes_male'):
+            return self.random_element(self.suffixes_male)
+        return self.suffix()
 
-    @classmethod
-    def suffix_female(cls):
-        if hasattr(cls, 'suffixes_female'):
-            return cls.random_element(cls.suffixes_female)
-        return cls.suffix()
+    def suffix_female(self):
+        if hasattr(self, 'suffixes_female'):
+            return self.random_element(self.suffixes_female)
+        return self.suffix()
+
+    def language_name(self):
+        """Generate a random i18n language name (e.g. English)."""
+        return self.random_element(self.language_names)
