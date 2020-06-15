@@ -1,8 +1,7 @@
-# coding=utf-8
-
-from functools import reduce
-from faker.shims import Counter
 import operator
+
+from collections import Counter
+from functools import reduce
 
 
 def add_dicts(*args):
